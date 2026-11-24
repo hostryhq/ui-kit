@@ -1,0 +1,36 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Secrets (never commit)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# Go
+*.exe
+*.test
+*.out
+vendor/
+bin/
+dist/
+
+# Node
+node_modules/
+.pnpm-store/
+npm-debug.log*
+yarn-error.log*
+.vite/
+*.tsbuildinfo
+coverage/
+
+# Rust / Tauri
+target/
+src-tauri/target/
+src-tauri/gen/
