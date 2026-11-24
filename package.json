@@ -22,13 +22,17 @@
     "./styles.css": "./dist/index.css"
   },
   "files": [
-    "dist"
+    "dist",
+    "tokens"
   ],
   "scripts": {
+    "tokens": "node scripts/build-tokens.mjs",
+    "tokens:check": "node scripts/build-tokens.mjs --check",
+    "contrast": "node scripts/check-contrast.mjs",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "build": "vite build && tsc -p tsconfig.build.json"
+    "build": "pnpm tokens:check && vite build && tsc -p tsconfig.build.json"
   },
   "peerDependencies": {
     "@solidjs/web": "2.0.3",

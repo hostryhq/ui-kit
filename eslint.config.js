@@ -12,4 +12,14 @@ export default tseslint.config(
       "no-console": "error",
     },
   },
+  {
+    // Node build scripts (token generation, contrast check).
+    files: ["scripts/**/*.mjs"],
+    languageOptions: { globals: { process: "readonly", URL: "readonly" } },
+  },
+  {
+    // Solid's `let el!: T; <div ref={el}>` ref idiom is assigned by the compiler.
+    files: ["**/*.tsx"],
+    rules: { "no-unassigned-vars": "off" },
+  },
 );
