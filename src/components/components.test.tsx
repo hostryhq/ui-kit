@@ -10,9 +10,10 @@ import { ToastRegion, createToastQueue } from "./Toast";
 describe("touch target standard", () => {
   it("tokens keep the 44 px minimum and controls use it", () => {
     const tokens = readFileSync("src/tokens/tokens.css", "utf8");
-    expect(tokens).toMatch(/--hy-touch-target:\s*44px/);
+    expect(tokens).toMatch(/--hy-size-touch-min:\s*44px/);
+    expect(tokens).toMatch(/--hy-touch-target:\s*var\(--hy-size-touch-min\)/);
     const styles = readFileSync("src/styles.css", "utf8");
-    expect(styles).toMatch(/\.hy-btn,[\s\S]*?min-height:\s*var\(--hy-touch-target\)/);
+    expect(styles).toMatch(/\.hy-btn,[\s\S]*?min-height:\s*max\(.*var\(--hy-touch-target\)\)/);
   });
 });
 
