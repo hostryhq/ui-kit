@@ -1,0 +1,42 @@
+/*
+ * Hostry design tokens (CSS variables).
+ * PLACEHOLDER VALUES: real tokens come from ux-designer (docs/design/). Components
+ * reference only these variables, never literal colours or sizes, so swapping this
+ * file re-themes every app. Dark theme (KDS) overrides under [data-theme="dark"].
+ */
+:root {
+  /* Touch targets: POS UX rule, 44 px minimum. Do not lower. */
+  --hy-touch-target: 44px;
+
+  /* Colour (placeholder) */
+  --hy-color-bg: #ffffff;
+  --hy-color-surface: #f5f5f5;
+  --hy-color-text: #111111;
+  --hy-color-text-muted: #555555;
+  --hy-color-border: #c8c8c8;
+  --hy-color-primary: #1a56db;
+  --hy-color-primary-text: #ffffff;
+  --hy-color-danger: #b91c1c;
+  --hy-color-danger-text: #ffffff;
+  --hy-color-focus: #f59e0b;
+  --hy-color-overlay: rgba(0, 0, 0, 0.5);
+
+  /* Spacing (placeholder) */
+  --hy-space-1: 4px;
+  --hy-space-2: 8px;
+  --hy-space-3: 12px;
+  --hy-space-4: 16px;
+
+  /* Shape and type (placeholder) */
+  --hy-radius: 6px;
+  --hy-font-family: system-ui, sans-serif;
+  --hy-font-size: 16px;
+}
+
+[data-theme="dark"] {
+  --hy-color-bg: #000000;
+  --hy-color-surface: #1a1a1a;
+  --hy-color-text: #ffffff;
+  --hy-color-text-muted: #bbbbbb;
+  --hy-color-border: #444444;
+}

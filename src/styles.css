@@ -1,0 +1,102 @@
+@import "./tokens/tokens.css";
+
+.hy-btn,
+.hy-input {
+  box-sizing: border-box;
+  min-height: var(--hy-touch-target);
+  font: inherit;
+  font-family: var(--hy-font-family);
+  font-size: var(--hy-font-size);
+  border-radius: var(--hy-radius);
+}
+
+.hy-btn {
+  min-width: var(--hy-touch-target);
+  padding: 0 var(--hy-space-4);
+  border: 1px solid var(--hy-color-border);
+  background: var(--hy-color-surface);
+  color: var(--hy-color-text);
+  cursor: pointer;
+}
+.hy-btn--primary {
+  background: var(--hy-color-primary);
+  border-color: var(--hy-color-primary);
+  color: var(--hy-color-primary-text);
+}
+.hy-btn--danger {
+  background: var(--hy-color-danger);
+  border-color: var(--hy-color-danger);
+  color: var(--hy-color-danger-text);
+}
+.hy-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.hy-btn:focus-visible,
+.hy-input:focus-visible {
+  outline: 3px solid var(--hy-color-focus);
+  outline-offset: 2px;
+}
+
+.hy-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--hy-space-1);
+  color: var(--hy-color-text);
+}
+.hy-input {
+  padding: 0 var(--hy-space-3);
+  border: 1px solid var(--hy-color-border);
+  background: var(--hy-color-bg);
+  color: var(--hy-color-text);
+}
+.hy-field__error {
+  color: var(--hy-color-danger);
+}
+
+.hy-dialog__overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--hy-color-overlay);
+}
+.hy-dialog {
+  min-width: 280px;
+  max-width: 90vw;
+  padding: var(--hy-space-4);
+  border-radius: var(--hy-radius);
+  background: var(--hy-color-bg);
+  color: var(--hy-color-text);
+}
+.hy-dialog__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--hy-space-3);
+}
+
+.hy-toast-region {
+  position: fixed;
+  bottom: var(--hy-space-4);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: var(--hy-space-2);
+}
+.hy-toast {
+  display: flex;
+  align-items: center;
+  gap: var(--hy-space-3);
+  min-height: var(--hy-touch-target);
+  padding: 0 var(--hy-space-3);
+  border-radius: var(--hy-radius);
+  background: var(--hy-color-text);
+  color: var(--hy-color-bg);
+}
+.hy-toast--error {
+  background: var(--hy-color-danger);
+  color: var(--hy-color-danger-text);
+}
