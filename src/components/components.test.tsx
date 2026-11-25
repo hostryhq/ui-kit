@@ -64,4 +64,14 @@ describe("components", () => {
     expect(q.items()).toHaveLength(0);
     vi.useRealTimers();
   });
+
+  it("Toast dismiss button has a test id and removes its toast", () => {
+    const q = createToastQueue(0);
+    render(() => <ToastRegion queue={q} />);
+    q.show("Saved");
+    flush();
+    fireEvent.click(screen.getByTestId("toast-dismiss"));
+    flush();
+    expect(q.items()).toHaveLength(0);
+  });
 });

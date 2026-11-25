@@ -37,7 +37,7 @@ export function ToastRegion(props: { queue?: ToastQueue }): JSX.Element {
         {(item) => (
           <div class={`hy-toast hy-toast--${item.kind}`} data-testid="toast">
             <span>{item.message}</span>
-            <Button aria-label={t("ui.toast.dismiss")} onClick={() => queue().dismiss(item.id)}>
+            <Button aria-label={t("ui.toast.dismiss")} data-testid="toast-dismiss" onClick={() => queue().dismiss(item.id)}>
               ×
             </Button>
           </div>

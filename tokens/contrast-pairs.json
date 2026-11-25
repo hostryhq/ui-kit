@@ -30,6 +30,15 @@
     { "fg": "border", "bg": "bg", "kind": "ui" },
     { "fg": "border", "bg": "surface", "kind": "ui" },
     { "fg": "border", "bg": "surfaceRaised", "kind": "ui" },
-    { "fg": "brand.primary", "bg": "bg", "kind": "ui" }
+    { "fg": "brand.primary", "bg": "bg", "kind": "ui" },
+    { "fg": "text", "bg": "surface", "kind": "text", "note": "table.state.free" },
+    { "fg": "info", "bg": "infoBg", "kind": "text", "note": "table.state.occupied" },
+    { "fg": "warning", "bg": "warningBg", "kind": "text", "note": "table.state.billed" },
+    { "fg": "success", "bg": "successBg", "kind": "text", "note": "table.state.ready" },
+    { "fg": "danger", "bg": "dangerBg", "kind": "text", "note": "table.state.attention" },
+    { "fg": "success", "bg": "surface", "kind": "ui", "note": "kds.ticket.border.fresh" },
+    { "fg": "warning", "bg": "surface", "kind": "ui", "note": "kds.ticket.border.waiting" },
+    { "fg": "danger", "bg": "surface", "kind": "ui", "note": "kds.ticket.border.late" },
+    { "fg": "text", "bg": "surface", "kind": "text", "note": "kds ticket body" }
   ]
 }

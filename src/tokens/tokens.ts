@@ -145,6 +145,63 @@ export const tokens = {
         "bg": "dangerBg"
       }
     },
+    "table": {
+      "_note": "Floor-plan table state (ui-kit.md token gaps). Existing semantic colours only; every state also has an icon and a text label, never colour alone.",
+      "state": {
+        "free": {
+          "icon": "circle",
+          "labelKey": "ui.table.state.free",
+          "fg": "text",
+          "bg": "surface"
+        },
+        "occupied": {
+          "icon": "users",
+          "labelKey": "ui.table.state.occupied",
+          "fg": "info",
+          "bg": "infoBg"
+        },
+        "billed": {
+          "icon": "receipt",
+          "labelKey": "ui.table.state.billed",
+          "fg": "warning",
+          "bg": "warningBg"
+        },
+        "ready": {
+          "icon": "check-circle",
+          "labelKey": "ui.table.state.ready",
+          "fg": "success",
+          "bg": "successBg"
+        },
+        "attention": {
+          "icon": "alert-triangle",
+          "labelKey": "ui.table.state.attention",
+          "fg": "danger",
+          "bg": "dangerBg"
+        }
+      }
+    },
+    "kds": {
+      "_note": "KDS ticket border by order age. Style is the non-colour cue (none / dashed / thick solid); colour follows kdsOrderAge. Age text is always printed.",
+      "ticket": {
+        "border": {
+          "fresh": {
+            "style": "none",
+            "width": "width",
+            "color": "success"
+          },
+          "waiting": {
+            "style": "dashed",
+            "width": "widthStrong",
+            "color": "warning"
+          },
+          "late": {
+            "style": "solid",
+            "width": "kdsLate",
+            "color": "danger"
+          }
+        }
+      }
+    },
     "kdsOrderAge": {
       "fresh": {
         "maxMinutes": 5,
@@ -267,7 +324,8 @@ export const tokens = {
     "width": 1,
     "widthStrong": 2,
     "focusRingWidth": 3,
-    "focusRingOffset": 2
+    "focusRingOffset": 2,
+    "kdsLate": 6
   },
   "elevation": {
     "0": "none",

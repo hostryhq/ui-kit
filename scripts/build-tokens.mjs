@@ -29,6 +29,13 @@ function themeVars(tokens, theme) {
     lines.push(`--hy-sync-${state}-fg: ${entry.fg[theme]};`);
     lines.push(`--hy-sync-${state}-bg: var(--hy-color-${kebab(entry.bg)});`);
   }
+  for (const [state, e] of Object.entries(tokens.color.table.state)) {
+    lines.push(`--hy-table-${state}-fg: var(--hy-color-${kebab(e.fg)});`);
+    lines.push(`--hy-table-${state}-bg: var(--hy-color-${kebab(e.bg)});`);
+  }
+  for (const [age, e] of Object.entries(tokens.color.kds.ticket.border)) {
+    lines.push(`--hy-kds-border-${age}-color: var(--hy-color-${kebab(e.color)});`);
+  }
   const sb = tokens.color.vendorAdmin.supportSessionBanner;
   for (const part of ["bg", "fg", "border"]) {
     lines.push(`--hy-support-banner-${part}: var(--hy-color-${kebab(sb[part])});`);
@@ -87,6 +94,10 @@ export function buildCss(tokens) {
   ];
   root.push(...dens("touch"));
 
+  for (const [age, e] of Object.entries(tokens.color.kds.ticket.border)) {
+    root.push(`--hy-kds-border-${age}-style: ${e.style};`);
+    root.push(`--hy-kds-border-${age}-width: var(--hy-border-${kebab(e.width)});`);
+  }
   const light = themeVars(tokens, "light");
   out.push(indented(':root,\n[data-theme="light"]', [...root, ...light]));
   out.push(indented('[data-density="touch"]', dens("touch")));
