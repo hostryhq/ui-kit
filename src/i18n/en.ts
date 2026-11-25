@@ -24,6 +24,7 @@ export const en = {
   "ui.table.state.attention": "Help",
   "ui.numpad.label": "Number pad",
   "ui.numpad.delete": "Delete",
+  "ui.pin.ok": "OK",
   "ui.pin.progress": "{count} of {total} digits",
   "ui.approval.who": "Who approves",
   "ui.approval.pick_user": "Pick who approves first.",

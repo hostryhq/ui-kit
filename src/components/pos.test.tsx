@@ -126,6 +126,45 @@ describe("PIN entry", () => {
     expect(onComplete).toHaveBeenCalledWith("9876");
   });
 
+  it("supports 6-digit PINs: completes at length, never in the DOM", () => {
+    const onComplete = vi.fn();
+    const { container } = render(() => <PinPad length={6} onComplete={onComplete} />);
+    press("12345");
+    flush();
+    expect(onComplete).not.toHaveBeenCalled();
+    expect(screen.getByTestId("pin-dots").getAttribute("aria-label")).toBe("5 of 6 digits");
+    press("6");
+    flush();
+    expect(onComplete).toHaveBeenCalledExactlyOnceWith("123456");
+    expect(container.querySelector("input")).toBeNull();
+  });
+
+  it("submits a 4 or 5 digit PIN early on Enter or OK, but not fewer than 4", () => {
+    const onComplete = vi.fn();
+    render(() => <PinPad length={6} onComplete={onComplete} />);
+    const pad = screen.getByTestId("pin-numpad");
+    press("123");
+    fireEvent.keyDown(pad, { key: "Enter" });
+    fireEvent.click(screen.getByTestId("pin-numpad-extra"));
+    flush();
+    expect(onComplete).not.toHaveBeenCalled();
+    press("4");
+    fireEvent.keyDown(pad, { key: "Enter" });
+    flush();
+    expect(onComplete).toHaveBeenLastCalledWith("1234");
+    expect(screen.getByTestId("pin-dots").getAttribute("data-filled")).toBe("0");
+    press("98765");
+    fireEvent.click(screen.getByTestId("pin-numpad-extra"));
+    flush();
+    expect(onComplete).toHaveBeenLastCalledWith("98765");
+    expect(screen.getByTestId("pin-numpad-extra").textContent).toBe("OK");
+  });
+
+  it("clamps length to 4..6", () => {
+    render(() => <PinPad length={9} onComplete={() => undefined} />);
+    expect(screen.getByTestId("pin-dots").getAttribute("aria-label")).toBe("0 of 6 digits");
+  });
+
   it("ignores input while disabled", () => {
     const onComplete = vi.fn();
     render(() => <PinPad length={1} disabled onComplete={onComplete} />);

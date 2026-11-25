@@ -5,6 +5,9 @@ import { formatMoney } from "../format";
 import { Dialog } from "./Dialog";
 import { Icon } from "./Icon";
 
+/** PINs are 4 to 6 digits (managers use 6). */
+const MIN_PIN = 4;
+const MAX_PIN = 6;
 const DIGITS = ["1", "2", "3", "4", "5", "6", "7", "8", "9"] as const;
 
 /**
@@ -63,7 +66,8 @@ export function Numpad(props: {
 
 /**
  * PIN entry. The digits live only in a closure variable: the DOM shows count dots, never the PIN
- * (no input value, no text). `onComplete` fires once when `length` digits are in, then the entry clears.
+ * (no input value, no text). `length` is 4 to 6 (default 4). `onComplete` fires once when `length` digits are in, or
+ * on Enter or the OK key with at least 4 digits, then the entry clears.
  */
 export function PinPad(props: {
   length?: number;
@@ -74,20 +78,27 @@ export function PinPad(props: {
   "data-testid"?: string;
 }): JSX.Element {
   const { t } = useI18n();
-  const length = () => props.length ?? 4;
+  const length = () => Math.min(MAX_PIN, Math.max(MIN_PIN, Math.trunc(props.length ?? MIN_PIN)));
   let digits = "";
   const [count, setCount] = createSignal(0);
   const id = () => props["data-testid"] ?? "pin";
 
+  const finish = () => {
+    const pin = digits;
+    digits = "";
+    setCount(0);
+    props.onComplete(pin);
+  };
   const push = (d: string) => {
     if (props.disabled || digits.length >= length()) return;
     digits += d;
-    if (digits.length === length()) {
-      const pin = digits;
-      digits = "";
-      setCount(0);
-      props.onComplete(pin);
-    } else setCount(digits.length);
+    if (digits.length === length()) finish();
+    else setCount(digits.length);
+  };
+  /** Enter or OK: submit a PIN shorter than `length` once it has at least 4 digits. */
+  const submit = () => {
+    if (props.disabled || digits.length < MIN_PIN) return;
+    finish();
   };
   const remove = () => {
     digits = digits.slice(0, -1);
@@ -112,7 +123,14 @@ export function PinPad(props: {
           {props.error}
         </p>
       </Show>
-      <Numpad onDigit={push} onDelete={remove} disabled={props.disabled} data-testid={`${id()}-numpad`} />
+      <Numpad
+        onDigit={push}
+        onDelete={remove}
+        onSubmit={submit}
+        extraKey={{ label: t("ui.pin.ok"), onPress: submit }}
+        disabled={props.disabled}
+        data-testid={`${id()}-numpad`}
+      />
     </div>
   );
 }
